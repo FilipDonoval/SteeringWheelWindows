@@ -3,8 +3,39 @@
 #include <iostream>
 #include <string>
 
+#include "json.hpp"
+
+using json = nlohmann::json;
+
+/*
+json jsonData = {
+    {"steering", 0},
+    {"object", {
+        {"currency", "EURO"},
+        {"value", 55.5} 
+    }}
+};
+*/
+
+json jsonData = {
+    {"steering", 0},
+    {"throttle", 0},
+    {"gearUp", 0},
+    {"gearDown", 0}
+};
+
+
+
 int main()
 {
+    /*
+    std::cout << jsonData << std::endl;
+    std::cout << "1" << std::endl;
+    std::cout << jsonData.dump() << std::endl;
+    std::string a = jsonData.dump(4);
+    std::cout << "2" << std::endl;
+    std::cout << a << std::endl;
+    Sleep(10000);*/
     // ViGEm
     
     // Allocate and connect ViGEm client
@@ -100,7 +131,7 @@ int main()
     // adb END
 
     
-    char buf[1024];
+    char buf[4096];
     memset(buf, 0, sizeof(buf));
     DWORD bytesRead;
 
@@ -123,10 +154,26 @@ int main()
         {
             ReadFile(hRead, buf, sizeof(buf) - 1, &bytesRead, nullptr);
        
+            std::cout << std::endl << std::endl;
+            std::cout << std::endl << std::endl;
+            std::cout << std::endl << std::endl;
+            std::cout << std::endl << std::endl;
+            std::cout << std::endl << std::endl;
             buf[bytesRead] = '\0';
-            std::cout << buf << std::endl;
-
+            std::cout << "buffer->" << buf << std::endl;
+            
             std::string str(buf);
+            str = str.substr(str.find_last_of('\n', str.size() - 2) + 1);
+            std::cout << "after->" << str << std::endl;
+            str = str.substr(str.find(": ") + 2);
+            std::cout << "trim->" << str << std::endl;
+
+
+            jsonData = json::parse(str);
+
+            std::cout << "json data: -> " << jsonData << std::endl << std::endl;
+
+            /*
             data = str.substr(str.find(": ") + 2);
             if (data.starts_with("<leftStick>"))
             {
@@ -157,7 +204,7 @@ int main()
             {
                 gearup = true;
             }
- 
+            */
 
             //std::cout << data << " size of" << data.size() << std::endl;
             /*for (char c : data) {
@@ -165,18 +212,33 @@ int main()
                 std::cout << "contains -> " << static_cast<int>(c) << std::endl;
             }*/
         }
-        
+
+        int dataInt = jsonData["steering"];
+        std::cout << dataInt << std::endl;
+        if (dataInt > 0)
+        {
+            leftStickPos = (dataInt - 9000) * -1;
+            leftStickPos = ((leftStickPos - -9000) * (32767 - -32768)) / (9000 - -9000) - 32767;
+
+        }
+        report.sThumbLX = static_cast<SHORT>(leftStickPos);
+
+        /*
         if (leftStick)
         {
-            int dataInt = std::stoi(data);
-
+            //int dataInt = std::stoi(data);
+            int dataInt = jsonData["leftStick"];
+            std::cout << dataInt << std::endl;
             if (dataInt > 0)
             {
                 leftStickPos = (dataInt - 9000) * -1;
 
             }
-        }
+        }*/
 
+
+        report.bRightTrigger = static_cast<BYTE>(jsonData["throttle"]);
+        /*
         if (throttle)
         {
             report.bRightTrigger = static_cast<BYTE>(200);
@@ -185,10 +247,11 @@ int main()
         {
             report.bRightTrigger = static_cast<BYTE>(0);
         }
+        */
+        //std::cout << leftStickPos << std::endl;
         
-        std::cout << leftStickPos << std::endl;
-        int a = ((leftStickPos - -9000) * (32767 - -32768)) / (9000 - -9000) - 32767;
-        std::cout << "a: " << a << std::endl;
+        //std::cout << "a: " << a << std::endl;
+        
 
         if (gearup)
         {
@@ -196,13 +259,13 @@ int main()
         }
         
 
-        report.sThumbLX = static_cast<SHORT>(a);
+        
 
         if (GetAsyncKeyState('X'))
         {
             break;
         }
-        if (GetAsyncKeyState('A'))
+        /*if (GetAsyncKeyState('A'))
         {
             //report.sThumbLX = static_cast<SHORT>(-32768 * 0.10);
             report.wButtons |= XUSB_GAMEPAD_DPAD_LEFT;
@@ -210,8 +273,32 @@ int main()
         if (GetAsyncKeyState('D'))
         {
             //report.sThumbLX = static_cast<SHORT>(-32768 * 0.70);
+        }*/
+
+
+
+        if (jsonData["gearUp"] == 1)
+        {
+            std::cout << "GEAR UP" << std::endl;
+            report.wButtons |= XUSB_GAMEPAD_A;
+        }
+        else
+        {
+            report.wButtons &= ~XUSB_GAMEPAD_A;
         }
 
+        if (jsonData["gearDown"] == 1)
+        {
+            std::cout << "GEAR DOWN" << std::endl;
+            report.wButtons |= XUSB_GAMEPAD_X;
+        }
+        else
+        {
+            report.wButtons &= ~XUSB_GAMEPAD_X;
+        }
+
+
+        /*
         static int aa = 0;
         if (gearup)
         {
@@ -222,12 +309,12 @@ int main()
         if (aa > 50)
         {
             report.wButtons &= XUSB_GAMEPAD_A;
-        }
+        }*/
        
 
         vigem_target_x360_update(client, pad, report);
-        //std::cout << count++ << std::endl;
-        Sleep(10);
+        std::cout << count++ << std::endl;
+        Sleep(1);
 
     }
 

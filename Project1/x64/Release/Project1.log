@@ -1,8 +1,8 @@
 ﻿  main.cpp
   Generating code
-  1 of 336 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  1 of 1816 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    3 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 ViGEmClient.lib(ViGEmClient.obj) : warning LNK4099: PDB 'ViGEmClient.pdb' was not found with 'ViGEmClient.lib(ViGEmClient.obj)' or at 'C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\x64\Release\ViGEmClient.pdb'; linking object as if no debug info
   Project1.vcxproj -> C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\x64\Release\Project1.exe
