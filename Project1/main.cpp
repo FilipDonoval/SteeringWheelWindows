@@ -20,6 +20,7 @@ json jsonData = {
 json jsonData = {
     {"steering", 0},
     {"throttle", 0},
+    {"brake", 0},
     {"gearUp", 0},
     {"gearDown", 0}
 };
@@ -28,6 +29,10 @@ json jsonData = {
 
 int main()
 {
+
+
+    HWND hWnd = GetConsoleWindow();
+    ShowWindow(hWnd, SW_HIDE);
     /*
     std::cout << jsonData << std::endl;
     std::cout << "1" << std::endl;
@@ -238,6 +243,7 @@ int main()
 
 
         report.bRightTrigger = static_cast<BYTE>(jsonData["throttle"]);
+        report.bLeftTrigger = static_cast<BYTE>(jsonData["brake"]);
         /*
         if (throttle)
         {
