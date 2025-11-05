@@ -211,11 +211,17 @@ int main()
                 SDL_Joystick* controller = SDL_OpenJoystick(e.jdevice.which);
                 if (!controller)
                 {
-                    std::cout << "cant open joystick";
-                }
-
-                
+                    std::cout << "cant open joystick" << std::endl;
+                } 
+                std::cout << "joystick: " << e.jdevice.which << " added" << std::endl;
             }
+
+
+            if (e.type == SDL_EVENT_JOYSTICK_REMOVED)
+            {
+                std::cout << "joystick: " << e.jdevice.which << " removed" << std::endl;
+            }
+
             if (e.type == SDL_EVENT_JOYSTICK_BUTTON_DOWN)
             {
                 std::cout << "controller: " << e.jbutton.which << " | button: " << static_cast<int>(e.jbutton.button) << " down\n";
