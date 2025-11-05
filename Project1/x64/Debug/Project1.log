@@ -1,2 +1,52 @@
 ﻿  main.cpp
-C:\Users\Filip\Desktop\New folder\adb-ViGEm-integration\Project1\Project1\main.cpp(2,10): error C1083: Cannot open include file: 'ViGEm/Client.h': No such file or directory
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(66,5): error C2065: 'PVIGEM_CLIENT': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(66,19): error C2146: syntax error: missing ';' before identifier 'client'
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(66,19): error C2065: 'client': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(66,28): error C3861: 'vigem_alloc': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(67,9): error C2065: 'client': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(73,38): error C2065: 'client': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(73,24): error C3861: 'vigem_connect': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(73,10): error C3861: 'VIGEM_SUCCESS': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(76,20): error C2065: 'client': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(76,9): error C3861: 'vigem_free': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(82,5): error C2065: 'PVIGEM_TARGET': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(82,19): error C2146: syntax error: missing ';' before identifier 'pad'
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(82,19): error C2065: 'pad': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(82,25): error C3861: 'vigem_target_x360_alloc': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(83,41): error C2065: 'client': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(83,49): error C2065: 'pad': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(83,24): error C3861: 'vigem_target_add': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(83,10): error C3861: 'VIGEM_SUCCESS': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(86,27): error C2065: 'pad': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(86,9): error C3861: 'vigem_target_free': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(87,20): error C2065: 'client': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(87,9): error C3861: 'vigem_free': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(102,5): error C2065: 'XUSB_REPORT': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(102,17): error C2146: syntax error: missing ';' before identifier 'report'
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(102,17): error C2065: 'report': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(103,5): error C2065: 'report': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(103,5): error C2065: 'XUSB_REPORT': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(275,9): error C2065: 'report': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(294,9): error C2065: 'report': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(295,9): error C2065: 'report': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(349,13): error C2065: 'report': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(349,32): error C2065: 'XUSB_GAMEPAD_A': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(357,13): error C2065: 'report': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(357,33): error C2065: 'XUSB_GAMEPAD_A': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(367,13): error C2065: 'report': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(367,32): error C2065: 'XUSB_GAMEPAD_X': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(375,13): error C2065: 'report': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(375,33): error C2065: 'XUSB_GAMEPAD_X': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(396,34): error C2065: 'client': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(396,42): error C2065: 'pad': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(396,47): error C2065: 'report': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(396,9): error C3861: 'vigem_target_x360_update': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(409,25): error C2065: 'client': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(409,33): error C2065: 'pad': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(409,5): error C3861: 'vigem_target_remove': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(410,23): error C2065: 'pad': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(410,5): error C3861: 'vigem_target_free': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(411,22): error C2065: 'client': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(411,5): error C3861: 'vigem_disconnect': identifier not found
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(412,16): error C2065: 'client': undeclared identifier
+C:\Users\Filip\Desktop\New folder\WorkingFolder\PC-ViGEm-adb\Project1\Project1\main.cpp(412,5): error C3861: 'vigem_free': identifier not found

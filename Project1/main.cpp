@@ -2,10 +2,21 @@
 #include <ViGEm/Client.h>
 #include <iostream>
 #include <string>
+#include <SDL3/SDL.h>
+//#include <SDL3/SDL_main.h>
+
 
 #include "json.hpp"
 
 using json = nlohmann::json;
+
+
+
+static SDL_Window* window = nullptr;
+static SDL_Renderer* renderer = nullptr;
+
+
+
 
 /*
 json jsonData = {
@@ -31,16 +42,25 @@ int main()
 {
 
 
-    HWND hWnd = GetConsoleWindow();
-    ShowWindow(hWnd, SW_HIDE);
-    /*
-    std::cout << jsonData << std::endl;
-    std::cout << "1" << std::endl;
-    std::cout << jsonData.dump() << std::endl;
-    std::string a = jsonData.dump(4);
-    std::cout << "2" << std::endl;
-    std::cout << a << std::endl;
-    Sleep(10000);*/
+    //HWND hWnd = GetConsoleWindow();
+    //ShowWindow(hWnd, SW_HIDE);
+
+    // SDL
+
+    // Initialize SDL
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
+    SDL_SetHint(SDL_HINT_JOYSTICK_ALLOW_BACKGROUND_EVENTS, "1");
+
+    window = SDL_CreateWindow("SDL3 test", 800, 400, 0);
+
+    renderer = SDL_CreateRenderer(window, nullptr);
+
+
+
+    // SDL END
+
+
+
     // ViGEm
     
     // Allocate and connect ViGEm client
@@ -59,6 +79,7 @@ int main()
     }
 
     // Allocate virtual Xbox 360 controller
+    
     PVIGEM_TARGET pad = vigem_target_x360_alloc();
     if (!VIGEM_SUCCESS(vigem_target_add(client, pad)))
     {
@@ -67,15 +88,29 @@ int main()
         vigem_free(client);
         return -1;
     }
+    /*
+    // Allocate virtual ds4 controller
+    PVIGEM_TARGET pad = vigem_target_ds4_alloc();
+    if (!VIGEM_SUCCESS(vigem_target_add(client, pad)))
+    {
+        std::cerr << "Failed to add virtual controller.\n";
+        vigem_target_free(pad);
+        vigem_free(client);
+        return -1;
+    }*/
 
+    // xbox controller
     XUSB_REPORT report;
     ZeroMemory(&report, sizeof(XUSB_REPORT));
+    
+    //DS4_REPORT report;
+    //ZeroMemory(&report, sizeof(DS4_REPORT));
 
     // 10% left on X axis (-3276)
-    report.sThumbLX = static_cast<SHORT>(-32768 * 0.50);
-    report.sThumbLY = 0;
+    //report.sThumbLX = static_cast<SHORT>(-32768 * 0.50);
+    //report.sThumbLY = 0;
 
-    report.wButtons = XUSB_GAMEPAD_X;
+   // report.wButtons = XUSB_GAMEPAD_X;
 
     // ViGEm END
 
@@ -150,8 +185,45 @@ int main()
     bool gearup = false;
 
     int count = 0;
+
+    SDL_Event e;
+    SDL_zero(e);
+    
     while (true)
     {
+        while (SDL_PollEvent(&e) == true)
+        {
+            if (e.type == SDL_EVENT_QUIT)
+            {
+                return 0;
+            }
+            if (e.type == SDL_EVENT_KEY_DOWN)
+            {
+
+                if (e.key.key == SDLK_K)
+                {
+                    std::cout << "dasjkldaskljdaskjldasjkldasjkldasjkl" << std::endl;
+                }
+            }
+
+            if (e.type == SDL_EVENT_JOYSTICK_ADDED)
+            {
+                SDL_Joystick* controller = SDL_OpenJoystick(e.jdevice.which);
+                if (!controller)
+                {
+                    std::cout << "cant open joystick";
+                }
+
+                
+            }
+            if (e.type == SDL_EVENT_JOYSTICK_BUTTON_DOWN)
+            {
+                std::cout << "controller: " << e.jbutton.which << " | button: " << static_cast<int>(e.jbutton.button) << " down\n";
+            }
+        }
+
+
+
  
         DWORD bytesAvaliable = 0;
         PeekNamedPipe(hRead, nullptr, 0, nullptr, &bytesAvaliable, nullptr);
@@ -159,19 +231,21 @@ int main()
         {
             ReadFile(hRead, buf, sizeof(buf) - 1, &bytesRead, nullptr);
        
+            /*
             std::cout << std::endl << std::endl;
             std::cout << std::endl << std::endl;
             std::cout << std::endl << std::endl;
             std::cout << std::endl << std::endl;
             std::cout << std::endl << std::endl;
+            */
             buf[bytesRead] = '\0';
-            std::cout << "buffer->" << buf << std::endl;
+            //std::cout << "buffer->" << buf << std::endl;
             
             std::string str(buf);
             str = str.substr(str.find_last_of('\n', str.size() - 2) + 1);
-            std::cout << "after->" << str << std::endl;
+            //std::cout << "after->" << str << std::endl;
             str = str.substr(str.find(": ") + 2);
-            std::cout << "trim->" << str << std::endl;
+            //std::cout << "trim->" << str << std::endl;
 
 
             jsonData = json::parse(str);
@@ -219,14 +293,27 @@ int main()
         }
 
         int dataInt = jsonData["steering"];
-        std::cout << dataInt << std::endl;
+        //std::cout << dataInt << std::endl;
         if (dataInt > 0)
         {
             leftStickPos = (dataInt - 9000) * -1;
+
+            // xbox
+            // range is from -32768 to 32767
             leftStickPos = ((leftStickPos - -9000) * (32767 - -32768)) / (9000 - -9000) - 32767;
 
+            // ds4
+            //range is from 0 to 255
+    
+            //leftStickPos = ((leftStickPos - -9000) * (255 - -0)) / (9000 - -9000) - 255;
+            //std::cout << leftStickPos * -1 << std::endl;
+
         }
+        // xbox 
         report.sThumbLX = static_cast<SHORT>(leftStickPos);
+        
+        //ds4
+        //report.bThumbLX = static_cast<BYTE>(leftStickPos);
 
         /*
         if (leftStick)
@@ -241,9 +328,15 @@ int main()
             }
         }*/
 
-
+        // xbox
         report.bRightTrigger = static_cast<BYTE>(jsonData["throttle"]);
         report.bLeftTrigger = static_cast<BYTE>(jsonData["brake"]);
+
+        // ds4
+        //report.bTriggerR = static_cast<BYTE>(jsonData["throttle"]);
+        //report.bTriggerL = static_cast<BYTE>(jsonData["brake"]);
+
+
         /*
         if (throttle)
         {
@@ -258,11 +351,15 @@ int main()
         
         //std::cout << "a: " << a << std::endl;
         
-
+        /*
         if (gearup)
         {
+            // xbox
+            //report.wButtons |= XUSB_GAMEPAD_X;
+
+            // ds4
             report.wButtons |= XUSB_GAMEPAD_X;
-        }
+        }*/
         
 
         
@@ -286,21 +383,37 @@ int main()
         if (jsonData["gearUp"] == 1)
         {
             std::cout << "GEAR UP" << std::endl;
+            // xbox
             report.wButtons |= XUSB_GAMEPAD_A;
+
+            // ds4
+            //report.wButtons |= DS4_BUTTON_CROSS;
         }
         else
         {
+            // xbox
             report.wButtons &= ~XUSB_GAMEPAD_A;
+
+            // ds4
+            //report.wButtons &= ~DS4_BUTTON_CROSS;
         }
 
         if (jsonData["gearDown"] == 1)
         {
             std::cout << "GEAR DOWN" << std::endl;
+            // xbox
             report.wButtons |= XUSB_GAMEPAD_X;
+
+            // ds4
+            //report.wButtons |= DS4_BUTTON_SQUARE;
         }
         else
         {
+            // xbox
             report.wButtons &= ~XUSB_GAMEPAD_X;
+
+            // ds4
+            //report.wButtons &= ~DS4_BUTTON_SQUARE;
         }
 
 
@@ -317,9 +430,13 @@ int main()
             report.wButtons &= XUSB_GAMEPAD_A;
         }*/
        
-
+        // xbox
         vigem_target_x360_update(client, pad, report);
-        std::cout << count++ << std::endl;
+
+        // ds4
+        //vigem_target_ds4_update(client, pad, report);
+
+        //std::cout << count++ << std::endl;
         Sleep(1);
 
     }

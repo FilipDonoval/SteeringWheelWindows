@@ -76,15 +76,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\include;C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\packages\sdl3_x64-windows\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp23</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ViGEmClient.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\lib;C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\packages\sdl3_x64-windows\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ViGEmClient.lib;setupapi.lib;SDL3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -95,15 +95,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\include;C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\packages\sdl3_x64-windows\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp23</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ViGEmClient.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\lib;C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\packages\sdl3_x64-windows\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ViGEmClient.lib;setupapi.lib;SDL3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -112,15 +112,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\include;C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\packages\sdl3_x64-windows\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp23</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ViGEmClient.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\lib;C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\packages\sdl3_x64-windows\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ViGEmClient.lib;setupapi.lib;SDL3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,15 +131,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\include;C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\packages\sdl3_x64-windows\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp23</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ViGEmClient.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\installed\x64-windows-static\lib;C:\Users\Filip\Desktop\Newfolder (2)\vcpkg\packages\sdl3_x64-windows\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ViGEmClient.lib;setupapi.lib;SDL3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
