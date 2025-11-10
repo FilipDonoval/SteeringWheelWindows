@@ -2,6 +2,8 @@
 #include <ViGEm/Client.h>
 #include <iostream>
 #include <string>
+#include <print>
+
 #include <SDL3/SDL.h>
 //#include <SDL3/SDL_main.h>
 
@@ -205,7 +207,7 @@ int main()
                     std::cout << "dasjkldaskljdaskjldasjkldasjkldasjkl" << std::endl;
                 }
             }
-
+             
             if (e.type == SDL_EVENT_JOYSTICK_ADDED)
             {
                 SDL_Joystick* controller = SDL_OpenJoystick(e.jdevice.which);
@@ -226,6 +228,44 @@ int main()
             {
                 std::cout << "controller: " << e.jbutton.which << " | button: " << static_cast<int>(e.jbutton.button) << " down\n";
             }
+            static int lx = 0;
+            static int ly = 0;
+            static int rx = 0;
+            static int ry = 0;
+            static int lt = 0;
+            static int rt = 0;
+            if (e.type == SDL_EVENT_JOYSTICK_AXIS_MOTION)
+            {
+                if (e.jaxis.axis == SDL_GAMEPAD_AXIS_LEFTX)
+                {
+                    lx = static_cast<int>(e.jaxis.value);
+                }
+                if (e.jaxis.axis == SDL_GAMEPAD_AXIS_LEFTY)
+                {
+                    ly = static_cast<int>(e.jaxis.value);
+                }
+                if (e.jaxis.axis == SDL_GAMEPAD_AXIS_RIGHTX)
+                {
+                    rx = static_cast<int>(e.jaxis.value);
+                }
+                if (e.jaxis.axis == SDL_GAMEPAD_AXIS_RIGHTY)
+                {
+                    ry = static_cast<int>(e.jaxis.value);
+                }
+                if (e.jaxis.axis == SDL_GAMEPAD_AXIS_LEFT_TRIGGER)
+                {
+                    lt = static_cast<int>(e.jaxis.value);
+                }
+                if (e.jaxis.axis == SDL_GAMEPAD_AXIS_RIGHT_TRIGGER)
+                {
+                    rt = static_cast<int>(e.jaxis.value);
+                }
+
+                //std::cout << "x: " << x << " | y: " << y << std::endl;
+                std::println("lx: {} | ly: {} | ry: {} | rx: {} | lt: {} | rt: {}", lx, ly, rx, ry, lt, rt);
+            }
+
+
         }
 
 
