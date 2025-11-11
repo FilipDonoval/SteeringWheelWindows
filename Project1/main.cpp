@@ -102,6 +102,10 @@ int main()
     }*/
 
     // xbox controller
+    auto a = vigem_target_get_pid(pad);
+    auto b = vigem_target_get_index(pad);
+    auto c = vigem_target_get_vid(pad);
+    auto d = vigem_target_get_type(pad);
     XUSB_REPORT report;
     ZeroMemory(&report, sizeof(XUSB_REPORT));
     
@@ -191,6 +195,17 @@ int main()
     SDL_Event e;
     SDL_zero(e);
     
+
+    short lx = 0;
+    short ly = 0;
+    short rx = 0;
+    short ry = 0;
+    short lt = 0;
+    short rt = 0;
+
+    int activeJoystick = -1;
+
+
     while (true)
     {
         while (SDL_PollEvent(&e) == true)
@@ -216,6 +231,15 @@ int main()
                     std::cout << "cant open joystick" << std::endl;
                 } 
                 std::cout << "joystick: " << e.jdevice.which << " added" << std::endl;
+
+                if (std::string(SDL_GetJoystickName(controller)) != "Xbox 360 Controller")
+                {
+                    activeJoystick = e.jdevice.which;
+                    std::cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" << std::endl;
+                }
+
+
+
             }
 
 
@@ -223,51 +247,57 @@ int main()
             {
                 std::cout << "joystick: " << e.jdevice.which << " removed" << std::endl;
             }
-
-            if (e.type == SDL_EVENT_JOYSTICK_BUTTON_DOWN)
+            if (e.jdevice.which == activeJoystick)
             {
-                std::cout << "controller: " << e.jbutton.which << " | button: " << static_cast<int>(e.jbutton.button) << " down\n";
-            }
-            static int lx = 0;
-            static int ly = 0;
-            static int rx = 0;
-            static int ry = 0;
-            static int lt = 0;
-            static int rt = 0;
-            if (e.type == SDL_EVENT_JOYSTICK_AXIS_MOTION)
-            {
-                if (e.jaxis.axis == SDL_GAMEPAD_AXIS_LEFTX)
+                if (e.type == SDL_EVENT_JOYSTICK_BUTTON_DOWN)
                 {
-                    lx = static_cast<int>(e.jaxis.value);
-                }
-                if (e.jaxis.axis == SDL_GAMEPAD_AXIS_LEFTY)
-                {
-                    ly = static_cast<int>(e.jaxis.value);
-                }
-                if (e.jaxis.axis == SDL_GAMEPAD_AXIS_RIGHTX)
-                {
-                    rx = static_cast<int>(e.jaxis.value);
-                }
-                if (e.jaxis.axis == SDL_GAMEPAD_AXIS_RIGHTY)
-                {
-                    ry = static_cast<int>(e.jaxis.value);
-                }
-                if (e.jaxis.axis == SDL_GAMEPAD_AXIS_LEFT_TRIGGER)
-                {
-                    lt = static_cast<int>(e.jaxis.value);
-                }
-                if (e.jaxis.axis == SDL_GAMEPAD_AXIS_RIGHT_TRIGGER)
-                {
-                    rt = static_cast<int>(e.jaxis.value);
+                    std::cout << "controller: " << e.jbutton.which << " | button: " << static_cast<int>(e.jbutton.button) << " down\n";
                 }
 
-                //std::cout << "x: " << x << " | y: " << y << std::endl;
-                std::println("lx: {} | ly: {} | ry: {} | rx: {} | lt: {} | rt: {}", lx, ly, rx, ry, lt, rt);
+                if (e.type == SDL_EVENT_JOYSTICK_AXIS_MOTION)
+                {
+                    if (e.jaxis.axis == SDL_GAMEPAD_AXIS_LEFTX)
+                    {
+                        lx = static_cast<int>(e.jaxis.value);
+                    }
+                    if (e.jaxis.axis == SDL_GAMEPAD_AXIS_LEFTY)
+                    {
+                        ly = static_cast<int>(e.jaxis.value);
+                    }
+                    if (e.jaxis.axis == SDL_GAMEPAD_AXIS_RIGHTX)
+                    {
+                        rx = static_cast<int>(e.jaxis.value);
+                    }
+                    if (e.jaxis.axis == SDL_GAMEPAD_AXIS_RIGHTY)
+                    {
+                        ry = static_cast<int>(e.jaxis.value);
+                    }
+                    if (e.jaxis.axis == SDL_GAMEPAD_AXIS_LEFT_TRIGGER)
+                    {
+                        lt = static_cast<int>(e.jaxis.value);
+                        std::println("lt: {}", lt);
+                    }
+                    if (e.jaxis.axis == SDL_GAMEPAD_AXIS_RIGHT_TRIGGER)
+                    {
+                        rt = static_cast<int>(e.jaxis.value);
+                        std::println("rt: {}", rt);
+                    }
+
+                    //std::cout << "x: " << x << " | y: " << y << std::endl;
+                    //std::println("{} {} {} {}", a, b, c, d);
+                    //std::cout << a << " " << b << " " << c << " " << d << std::endl;
+                    std::println("joy: {} / lx: {} | ly: {} | ry: {} | rx: {} | lt: {} | rt: {}", e.jaxis.which, lx, ly, rx, ry, lt, rt);
+                    //std::println("joy: {}", e.jaxis.which);
+                }
             }
+            
 
 
         }
 
+
+        report.sThumbRX = lt;
+        report.sThumbRY = rt;
 
 
  
@@ -375,6 +405,8 @@ int main()
         }*/
 
         // xbox
+        //report.bRightTrigger = static_cast<BYTE>(jsonData["throttle"]);----------------------------------
+        //report.bLeftTrigger = static_cast<BYTE>(jsonData["brake"]);---------------------------------------
         report.bRightTrigger = static_cast<BYTE>(jsonData["throttle"]);
         report.bLeftTrigger = static_cast<BYTE>(jsonData["brake"]);
 
